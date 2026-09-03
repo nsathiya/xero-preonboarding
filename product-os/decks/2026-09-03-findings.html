@@ -393,40 +393,53 @@
       <div class="node">
         <span class="abs">Workflow</span>
         <b>Zapier</b>
-        <p>User owns an explicit graph &mdash; steps, inputs, outputs, test, publish.
-        AI lives <em>inside</em> a step. High control, low autonomy.</p>
+        <p><b>Many workflows, no agent object.</b> The user owns an explicit graph
+        &mdash; steps, inputs, outputs, test, publish &mdash; and AI lives
+        <em>inside</em> a step.</p>
       </div>
       <div class="node">
         <span class="abs">Agent</span>
         <b>Notion</b>
-        <p>A persistent named agent with instructions, context, tools, triggers,
-        permissions &mdash; but no step graph. The real middle, not a compromise.</p>
+        <p><b>Many named agents,</b> one per job or vertical. Instructions, context,
+        tools, triggers, permissions &mdash; but no step graph. A real middle, not a
+        compromise.</p>
       </div>
       <div class="node">
-        <span class="abs">AI employee</span>
+        <span class="abs">Task</span>
         <b>Viktor</b>
-        <p>User delegates an outcome; Viktor picks the path. The workflow is
-        neither visible nor configurable. Fast to start, hard to govern.</p>
+        <p><b>One employee, many tasks.</b> The employee is singular and
+        pre-existing, so the object you create is a task assigned to it. The plan is
+        neither visible nor editable.</p>
       </div>
     </div>
   </div>
 
   <p>
-    Hands-on, this held up. Zapier published <em>Slack Feedback &rarr; AI Triage
-    Analysis &rarr; Email</em>, with AI by Zapier as one step on the canvas. Notion
-    published a <em>Customer Feedback Triage Agent</em>. Viktor took a brief in
-    Slack and never produced an editable object at all.
+    The comparison only holds if it is object-to-object. Viktor markets an "AI
+    employee," but that is the persona, not the thing you make &mdash; and
+    <strong>the count is the discriminator.</strong> Notion gives you many agents;
+    Viktor gives you one employee and many tasks; Zapier gives you no agent at all.
+  </p>
+  <p>
+    That also explains the Viktor result better than "the portal was buggy": there
+    was no task editor because the task was never materialised outside Slack.
+    Hands-on, Zapier published <em>Slack Feedback &rarr; AI Triage Analysis &rarr;
+    Email</em>. Notion published a <em>Customer Feedback Triage Agent</em>. Viktor
+    took a brief and produced nothing inspectable.
     <span class="ev">ev-agent-zapier-001, ev-agent-notion-003, ev-agent-viktor-003</span>
   </p>
 
   <div class="callout take">
-    <span class="label">Why this matters for XeroForce</span>
+    <span class="label">Why the object choice is the decision, not a UI preference</span>
     <p>
-      We are choosing a point on this line, not a model vendor. A ledger workflow
-      like invoice exception handling is probably unsafe to leave as "the agent
-      figures out the steps" &mdash; but a named, scoped specialist with an audit
-      trail is a genuinely different product from a step graph. That decision
-      should be explicit and early, because it determines the governance model.
+      Permissions, audit, and ownership all attach to whatever the user creates. So
+      "one employee, many tasks" and "many scoped agents" have different governance
+      ceilings <em>before a single feature is built</em> &mdash; you cannot scope
+      access per job if there is only one worker to scope. A ledger workflow like
+      invoice exception handling is probably unsafe to leave as "the agent works out
+      the steps," which argues against the Viktor end for anything touching money.
+      Choosing this early is free; choosing it late means rebuilding the governance
+      model.
       <span class="ev">ins-005, hyp-005</span>
     </p>
   </div>
@@ -447,17 +460,38 @@
     </thead>
     <tbody>
       <tr>
-        <td class="dim">Unit the user creates</td>
-        <td>A Zap on a canvas</td>
-        <td>A named persistent agent</td>
-        <td>Nothing inspectable this pass</td>
+        <td class="dim">Object created</td>
+        <td>A workflow &mdash; many, no agent object</td>
+        <td>An agent &mdash; many, one per job</td>
+        <td>A task &mdash; many, against one employee</td>
+        <td class="st"><span class="pill verified">Verified</span></td>
+      </tr>
+      <tr>
+        <td class="dim">Is it materialised?</td>
+        <td>Yes &mdash; editable canvas</td>
+        <td>Yes &mdash; editable config</td>
+        <td><strong>No</strong> &mdash; nothing inspectable this pass</td>
+        <td class="st"><span class="pill verified">Verified</span></td>
+      </tr>
+      <tr>
+        <td class="dim">AI at build time</td>
+        <td>Copilot asks clarifying questions, then constructs the Zap</td>
+        <td>Generates an agent from a description, then you edit</td>
+        <td>Chat proposes a plan; output is the run, not a spec</td>
+        <td class="st"><span class="pill verified">Verified</span></td>
+      </tr>
+      <tr>
+        <td class="dim">AI at runtime</td>
+        <td>AI by Zapier as a step in the graph</td>
+        <td>Agent executes against its instructions</td>
+        <td>Employee executes the delegated outcome</td>
         <td class="st"><span class="pill verified">Verified</span></td>
       </tr>
       <tr>
         <td class="dim">Home surface</td>
         <td>In-product canvas, Copilot beside it</td>
         <td>In-product builder</td>
-        <td>Slack/Teams; portal is secondary</td>
+        <td>Slack/Teams; portal is secondary and disagreed with Slack</td>
         <td class="st"><span class="pill verified">Verified</span></td>
       </tr>
       <tr>
@@ -467,106 +501,135 @@
         <td>Connect Slack, watch videos, connect tools</td>
         <td class="st"><span class="pill verified">Verified</span></td>
       </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>1. AI has two jobs here, and they are different products</h3>
+  <p>
+    AI <strong>builds</strong> the workflow, and AI <strong>runs inside</strong> the
+    workflow. Every vendor ships both and markets them as one thing.
+  </p>
+  <p>
+    At build time, Zapier's Copilot interrogates you with clarifying questions and
+    then constructs the Zap; Notion generates an agent from a description that you
+    then edit. At runtime, AI by Zapier is a step in the published graph, and the
+    Notion agent executes against its instructions. You can see the seam where
+    build-time AI is incomplete: Copilot could say what instructions belonged in a
+    step but sometimes needed you to copy and paste them yourself.
+    <span class="ev">ev-agent-zapier-001, ev-agent-notion-001</span>
+  </p>
+  <p>
+    <strong>The trust profiles are not comparable.</strong> A wrong build-time
+    suggestion is caught by a human before publish. A wrong runtime action posts to
+    the ledger. So build time is the cheaper place to be aggressive &mdash; it can
+    be confidently wrong at low cost &mdash; <em>provided it produces a reviewable
+    artifact.</em>
+  </p>
+
+  <div class="callout take">
+    <span class="label">This is the real Viktor lesson</span>
+    <p>
+      Viktor collapsed build time and runtime into one chat. The spec was never
+      materialised as an artifact, so there was nothing to edit, test, or audit
+      &mdash; inspectability, testing, and audit were all lost in a single design
+      move, not three. That is the failure mode to avoid, and it is a stronger
+      reason to keep a materialised object than any preference about canvases.
+      <span class="ev">ins-012</span>
+    </p>
+  </div>
+
+  <h3>2. Safety is three separate gaps &mdash; and gating is the one nobody made intelligent</h3>
+  <p>
+    These get bundled as "trust and safety." They are three roadmap items with
+    different owners.
+  </p>
+
+  <div class="tw">
+  <table>
+    <thead>
+      <tr><th class="dim">Gap</th><th>Where the three products landed</th><th class="st">Status</th></tr>
+    </thead>
+    <tbody>
       <tr>
-        <td class="dim">Human in the loop</td>
-        <td>Optional step after an AI step</td>
-        <td>"Require confirmation before email"</td>
-        <td>Slack Approve / Always approve</td>
-        <td class="st"><span class="pill verified">Verified</span></td>
-      </tr>
-      <tr>
-        <td class="dim">Run history</td>
-        <td>Zap history is a first-class page &mdash; empty right after publish</td>
-        <td>Current-run step trace + Recent chats. Activity logs advertised, not found</td>
-        <td>Tasks showed 0 while Slack claimed the job was live</td>
+        <td class="dim">Auditability<br><span style="font-weight:400;color:var(--ink-faint)">what happened</span></td>
+        <td>Zapier is ahead &mdash; Zap history is a first-class page. Notion advertises activity logs that were not on this workspace. Viktor showed 0 tasks while insisting a job was live in the backend.</td>
         <td class="st"><span class="pill disputed">Disputed</span></td>
       </tr>
       <tr>
-        <td class="dim">Audit / governance</td>
-        <td>Not examined this pass</td>
-        <td>Workspace audit log documented, gated to Enterprise</td>
-        <td>Usage page not opened</td>
-        <td class="st"><span class="pill unseen">Unseen</span></td>
+        <td class="dim">Reversibility<br><span style="font-weight:400;color:var(--ink-faint)">undo it</span></td>
+        <td><strong>Absent from all three.</strong> No unsend in Notion, no rollback observed anywhere in the category.</td>
+        <td class="st"><span class="pill verified">Verified</span></td>
+      </tr>
+      <tr>
+        <td class="dim">Gating<br><span style="font-weight:400;color:var(--ink-faint)">when to ask a human</span></td>
+        <td>All three treat this as <em>static configuration</em> &mdash; a "require confirmation before email" toggle, an optional Human-in-the-Loop step, a Slack Approve / Always-approve button. None decides from confidence, risk, or amount.</td>
+        <td class="st"><span class="pill verified">Verified</span></td>
       </tr>
     </tbody>
   </table>
   </div>
 
-  <h3>Three findings worth carrying into product decisions</h3>
-
-  <h4>1. Connected is not the same as live</h4>
   <p>
-    Connecting Slack and toggling a trigger does not mean the agent is watching.
-    A plain Slack post did nothing while settings were unsaved. After Save
-    <em>plus</em> an <code>@Notion AI</code> mention, the same message was captured,
-    written to a database, and confirmed in-thread. Save is a hard gate &mdash;
-    the UI says the agent will not run until you save.
-    <span class="ev">ev-agent-notion-002</span>
+    <strong>Statically-configured gating cannot work for ledger writes.</strong> A
+    $40 coding and a $120k journal entry cannot share one toggle. Risk-triggered
+    gating is the thing to build &mdash; and it is the specific place where the
+    accounting competitors are ahead rather than merely different: Digits routes
+    low-confidence items to an exception queue, Karbon's checks flag and humans
+    resolve. Both <span class="pill claimed">Claimed</span>, neither verified.
+    <span class="ev">ins-013, ev-comp-digits-001, ev-comp-aider-003</span>
   </p>
   <p>
-    Accounting agents will have the same three-way split: consent, action scope,
-    and trigger activation. Users will assume connected means live unless we show
-    them "this run happened, this row was written."
-    <span class="ev">ins-002</span>
-  </p>
-
-  <h4>2. Writes get approval; interpretation gets a prompt; audit is thin</h4>
-  <p>
-    Quality rules live in a free-text instructions box. Write safety lives in
-    real product controls &mdash; OAuth scopes, dropdowns, confirmation toggles.
-    That asymmetry is consistent across all three products. Post-hoc
-    accountability is where they all thin out.
-    <span class="ev">ins-003, hyp-003</span>
-  </p>
-  <p>
-    Notion's help centre sells Custom Agents as "safe and transparent by design,"
-    promising activity logs, version history, and reversible runs
-    <span class="pill docs">Docs</span>. On this workspace the activity logs were
-    not there <span class="pill disputed">Disputed</span>. What exists is a
-    current-run trace and an analytics page that upsells Enterprise.
-    <span class="ev">ev-agent-notion-005</span>
+    Reversibility is the second-order requirement and the whole category is missing
+    it. For financial writes it is arguably worth more than audit: audit tells an
+    operator what went wrong, rollback lets them fix it.
   </p>
 
   <div class="callout">
-    <span class="label">Design consequence</span>
+    <span class="label">The related asymmetry</span>
     <p>
-      Human approval before an outbound or financial write is the right default;
-      prompt guardrails are not enough. And do not copy Notion's help copy. If we
-      advertise an audit trail, operators will believe they have one &mdash; which
-      is worse than not claiming it, when the action touches money.
+      Dangerous <em>actions</em> get real machinery &mdash; OAuth scopes, dropdowns,
+      confirmation-before-send. Whether the agent <em>reasoned correctly</em> gets a
+      free-text box with a "Guardrails" heading. For accounting that is backwards:
+      posting to the wrong account is a judgment error, and no approval toggle
+      catches it. Digits' answer is a verification layer that grades each
+      categorisation against firm history before posting &mdash; see section 02.
+      <span class="ev">ins-003, hyp-003</span>
     </p>
   </div>
 
-  <h4>3. Messaging-first setup buys speed and sells inspectability</h4>
+  <h3>3. Integration runs both directions, and we tend to plan for one</h3>
   <p>
-    Viktor is the cleanest natural experiment here. Onboarding is Slack-first, and
-    a real pipeline was configured entirely through chat &mdash; a proposal and an
-    Approve button, with no streaming, no loading state, and no configuration
-    knobs. A later session still could not open a task editor. Tasks showed 0.
-    <span class="ev">ev-agent-viktor-001</span>
+    Every product integrates other tools <strong>inbound</strong>. Every product can
+    also be integrated <strong>outbound</strong>, as a capability inside someone
+    else's workflow builder or agent. Those are different strategies that get
+    collapsed into a single ecosystem bullet.
   </p>
   <p>
-    Asked about it, Viktor confirmed the task existed and was active in the
-    backend, called the empty portal a display bug, and said the scheduled digest
-    would run regardless. Sign-out and the calendar view were also empty.
-    <span class="ev">ev-agent-viktor-003</span>
+    So there are two questions for Xero, and the second is usually asked first.
+    <strong>Does Xero host</strong> &mdash; does the work happen on our surface,
+    competing with Zapier and Karbon for that position? And <strong>is Xero
+    callable</strong> &mdash; can an agent elsewhere use Xero as a capability?
   </p>
   <p>
-    Two surfaces, no shared system of record &mdash; and the employee is also the
-    support desk. Chat gets an "employee" live in minutes, but accounting
-    workflows need inspectable setup on the same surface operators return to. If
-    chat can claim a live backend job while the portal stays empty, nobody can
-    tell what is actually running, or edit it except by asking.
-    <span class="ev">ins-004, hyp-004</span>
+    Being callable is not free. The reasoning, the interface, and the customer
+    relationship all move to the caller, and Xero becomes a commodity capability.
+    But refusing means firms route Xero data through competitors that allow it, and
+    Digits' MCP server is already live for Claude, ChatGPT and Cursor while Karbon
+    announced one in June. Zapier is hedging deliberately &mdash; a host with a
+    canvas <em>and</em> a positioned tool layer for external agents. MCP is the
+    mechanism once surface-versus-capability is settled, not a substitute for
+    settling it.
+    <span class="ev">ins-008, ev-comp-digits-001, ev-agent-zapier-001</span>
   </p>
 
   <div class="callout gap">
     <span class="label">Still open on agent builders</span>
     <ul>
-      <li>Create a Zapier <em>Agent</em>, not a Zap &mdash; is it still a graph underneath? This is the test that falsifies our read of Zapier's bet. <span class="ev">hyp-006</span></li>
-      <li>Does Viktor's scheduled digest actually arrive? Either answer tells us the portal was not the truth.</li>
+      <li>Create a Zapier <em>Agent</em>, not a Zap &mdash; is it still a graph underneath, and does it produce a build-time artifact? <span class="ev">hyp-006, ins-012</span></li>
+      <li>Any product where the gate is confidence- or amount-triggered rather than configured. We have not found one.</li>
+      <li>Does any product offer undo on a completed write?</li>
       <li>Notion version history &mdash; also missing, or just elsewhere?</li>
-      <li>Whether Zapier's Human-in-the-Loop step genuinely pauses a send.</li>
       <li>HubSpot: skipped, no access.</li>
     </ul>
   </div>
@@ -677,7 +740,56 @@
       may cost more than one contained close if nobody reads Tuesday-afternoon
       numbers. Digits' story is a client seeing treated numbers the day a Stripe
       payout lands. That is a good story. It is not evidence.
+    </p>
+    <p>
+      And "do they want it" is the weaker form of the question. <strong>Continuous
+      close is a behaviour migration, not a feature.</strong> The firm has to move
+      from batch review to continuous exception handling, which changes staffing,
+      scheduling, and what clients expect. That is why Digits had to rebuild the
+      ledger &mdash; and also why a firm might decline even if the technology works
+      perfectly. So: are firms willing to change behaviour, and does adoption need
+      an explicit incentive to happen at all?
       <span class="ev">hyp-011</span>
+    </p>
+  </div>
+
+  <h3>Why automation goes this far in accounting: verifiability, not an absence of judgment</h3>
+  <p>
+    The tempting read of a 95% auto-post rate is that accounting is rules-based and
+    needs little judgment &mdash; which would imply adoption should outrun
+    engineering easily. <strong>Digits' own whitepaper contradicts that read.</strong>
+    It reports <strong>10.4% human-versus-human disagreement</strong> on
+    categorisation and a <strong>79.1% human baseline</strong>. Two accountants shown
+    the same transaction disagree roughly one time in ten. A rulebook would put
+    humans near 100% and in agreement with each other.
+    <span class="ev">ev-comp-digits-002</span>
+  </p>
+  <p>
+    The distinction that survives the evidence is <strong>verifiability</strong>. A
+    categorisation can be graded &mdash; against firm history, prior decisions, and a
+    ledger that must balance. That is exactly what lets Digits run a second AI layer
+    checking the first <em>before</em> posting. Engineering has no equivalent grader:
+    tests catch some errors and no design errors.
+  </p>
+
+  <div class="callout take">
+    <span class="label">What this changes about how we think about adoption</span>
+    <p>
+      Trust is the outcome; <strong>demonstrable verification is the mechanism that
+      produces it.</strong> So the thing to build is the checking layer, not more
+      model quality &mdash; and that is a concrete, fundable answer to "how do we earn
+      permission to act."
+    </p>
+    <p>
+      But the adoption equation has two terms pulling opposite ways. Verifiability
+      raises the ceiling; <strong>consequence severity raises the confidence
+      threshold</strong> required before anyone lets an agent act. A bad commit is
+      reverted in review. A bad posting has tax and audit exposure and may need a
+      restatement. So the likely shape is: fast adoption where errors are cheap to
+      correct &mdash; coding, categorisation, reconciliation &mdash; and slow adoption
+      for anything filed, remitted, or reported externally. That is a customer
+      question, not a desk-research one.
+      <span class="ev">ins-014, hyp-012</span>
     </p>
   </div>
 
@@ -721,7 +833,33 @@
     </p>
   </div>
 
-  <h3>Two things both competitors do that we should notice</h3>
+  <h3>Their tutorials teach workflow and tool together &mdash; which cuts both ways</h3>
+  <p>
+    Aider's tutorial names the manager's problem first (no single view of client
+    close; "status lives in weekly meetings and memory"; the same problem at 15 or
+    15,000 clients), then shows the tool. One <em>Monthly Close &mdash; Accrual</em>
+    template sits on 82 clients. Teaching workflow-plus-tool only works if the close
+    is standardised enough to template &mdash; the contrast with MSP tooling, where
+    vendors sell tools and workflows vary so widely that process content does not
+    generalise.
+    <span class="ev">ev-comp-aider-003, ins-010</span>
+  </p>
+  <p>
+    <strong>Low process variance is good for shipping and bad for defensibility,</strong>
+    and only the first half usually gets noticed. Templates work and onboarding is
+    fast &mdash; but if one accrual template covers 82 clients, that is as easy for
+    Karbon to copy from us as for us to copy from them. There is no moat in a
+    standard process.
+  </p>
+  <p>
+    Two cautions on the inference. A template on 82 clients shows one <em>firm</em>
+    standardised, not an industry. And a vendor teaching the close as standard has a
+    commercial interest in it being standard. The stronger argument is from the
+    content market rather than from Karbon: tutorials that teach process would not
+    find an audience if practitioners did not recognise the process.
+  </p>
+
+  <h3>Both competitors are further along than the agent builders on trust and reach</h3>
 
   <h4>Their trust models are ahead of the agent builders'</h4>
   <p>
@@ -742,11 +880,9 @@
   <h4>Both ship or announce MCP servers</h4>
   <p>
     Digits' is live for Claude, ChatGPT and Cursor; Karbon announced one in June.
-    Zapier positions itself as a tool layer for external agents too. The pattern is
-    an industry convergence on <em>accounting data as tools for whatever AI the
-    firm chooses</em>. The value shifts from "our AI is best" to "our data is
-    reachable." If Xero has no equivalent open tool layer, firms will route Xero
-    data through competitors that do.
+    The value is shifting from "our AI is best" to "our data is reachable" &mdash;
+    which is the outbound half of the integration question in section 01, and it is
+    being answered in the market whether or not we answer it deliberately.
     <span class="ev">ins-008</span>
   </p>
 
@@ -811,10 +947,22 @@
     Every hypothesis in the corpus carries an explicit
     <code>what_would_strengthen</code> and <code>what_would_falsify</code>. That
     is not documentation &mdash; it is an interview guide that already exists.
-    Eleven hypotheses currently generate roughly sixty specific things that would
+    Twelve hypotheses currently generate roughly seventy specific things that would
     move a belief. The engine's job is to turn those into questions, absorb the
     answers, and show which beliefs moved.
   </p>
+
+  <div class="callout take">
+    <span class="label">The cheapest first input is not new interviews</span>
+    <p>
+      <strong>Existing customer call recordings.</strong> That evidence already
+      exists, needs no recruitment, and can be mined against the falsifiers above
+      before a single new conversation is scheduled. It reorders this whole section:
+      ingest and code what we already have, find out which beliefs it already moves,
+      and only then design interviews for the gaps it cannot close. The main ask
+      becomes access, not calendar time.
+    </p>
+  </div>
 
   <h4>What I want the engine to do</h4>
   <ol>
@@ -852,7 +1000,7 @@
     </p>
   </div>
 
-  <h3>The four questions I would take to customers first</h3>
+  <h3>The five questions I would take to customers first</h3>
   <p>
     Each maps to a live hypothesis, and each has a real chance of killing
     something in this deck.
@@ -881,9 +1029,14 @@
         <td class="evc"><span class="ev">hyp-005</span></td>
       </tr>
       <tr>
-        <td class="dim">After an agent acts, what do you need to see?</td>
-        <td>Whether a run log is table stakes or a nice-to-have, and whether "undo" is expected. Competitors market embedded verification and audit trails; agent builders do not ship them. We do not know which one customers price.</td>
-        <td class="evc"><span class="ev">hyp-003, hyp-008</span></td>
+        <td class="dim">After an agent acts, what do you need to see &mdash; and be able to undo?</td>
+        <td>Whether a run log is table stakes or a nice-to-have, and whether rollback is expected. Nobody in the category ships undo, so if customers expect it, that is an opening rather than a gap. Competitors market embedded verification and audit trails; agent builders do not ship them; we do not know which customers actually pay for.</td>
+        <td class="evc"><span class="ev">hyp-003, hyp-008, ins-013</span></td>
+      </tr>
+      <tr>
+        <td class="dim">Which parts of the close would you let run if a check verified them first?</td>
+        <td>Tests the verifiability thesis and separates it from blanket distrust. The prediction is that reversible steps (coding, reconciliation) get automated readily and anything filed or remitted does not. If firms refuse regardless of reversibility, the barrier is trust rather than error cost &mdash; and the checking layer will not fix it.</td>
+        <td class="evc"><span class="ev">hyp-012, ins-014</span></td>
       </tr>
     </tbody>
   </table>
@@ -911,23 +1064,38 @@
   <ol>
     <li><strong>Which fight are we in?</strong> Defending the ledger against
     Digits, or covering the client lifecycle against Karbon, or both. This shapes
-    everything downstream. <span class="ev">ins-006</span></li>
-    <li><strong>Where should XeroForce sit on define-versus-delegate?</strong>
-    Visible pipeline with models in steps, or named scoped agents. Not a UI
-    question &mdash; it sets the governance model. <span class="ev">hyp-005</span></li>
-    <li><strong>Is customer access something I can get in the next fortnight?</strong>
-    Without it, Section 03 stays theoretical and the strategic questions stay
-    open.</li>
+    everything downstream, and it is the one question here we can answer internally
+    without customer research &mdash; which makes it both the cheapest to resolve
+    and the most blocking. <span class="ev">ins-006, hyp-009</span></li>
+
+    <li><strong>What object does XeroForce give the user &mdash; workflow, agent,
+    or task?</strong> Not a UI question. Permissions, audit, and ownership attach
+    to whatever they create, so this sets the governance ceiling before any feature
+    exists. <span class="ev">ins-005, hyp-005</span></li>
+
+    <li><strong>Is Xero a surface or a capability?</strong> Do we want work to
+    happen on our platform, be callable from someone else's agent, or both like
+    Zapier? MCP investment follows this answer rather than substituting for it.
+    <span class="ev">ins-008</span></li>
+
+    <li><strong>Can I get access to existing customer call recordings?</strong>
+    This is the unblocking ask. It is cheaper than running interviews, the evidence
+    already exists, and without it section 03 stays theoretical.</li>
   </ol>
 
   <h3>What I will do regardless</h3>
   <ul>
-    <li>Create a Zapier <em>Agent</em> rather than a Zap &mdash; the cleanest
-    single test of whether the workflow graph survives. <span class="ev">hyp-006</span></li>
+    <li>Mine existing customer calls against the falsifiers already in the corpus,
+    as soon as I have access.</li>
+    <li>Create a Zapier <em>Agent</em> rather than a Zap &mdash; the cleanest single
+    test of whether the workflow graph survives, and of whether it produces a
+    build-time artifact. <span class="ev">hyp-006, ins-012</span></li>
     <li>Hands-on trials of Digits and Aider period close, to convert
     <span class="pill claimed">Claimed</span> rows into
     <span class="pill verified">Verified</span> or
-    <span class="pill disputed">Disputed</span> ones.</li>
+    <span class="pill disputed">Disputed</span> ones &mdash; starting with what
+    actually routes an item into Digits' exception queue, since risk-triggered
+    gating is the capability we most need to understand.</li>
     <li>Reconcile Digits' conflicting benchmark figures.</li>
     <li>Extend the enforced scorecard pattern to agent builders and to the
     customer domain, so the next corpus starts with the discipline rather than
@@ -951,8 +1119,8 @@
     <strong>Sources.</strong> 16 immutable evidence files under
     <code>evidence/</code> &mdash; hands-on product passes with screenshots and
     recordings, first-party docs, vendor whitepapers and comparison pages. Living
-    interpretations in <code>beliefs/insights.yaml</code> (11 insights) and
-    <code>beliefs/hypotheses.yaml</code> (11 hypotheses). Per-competitor current
+    interpretations in <code>beliefs/insights.yaml</code> (14 insights) and
+    <code>beliefs/hypotheses.yaml</code> (12 hypotheses). Per-competitor current
     reads in <code>notes/competitors/scorecard/</code>.
   </p>
   <p>

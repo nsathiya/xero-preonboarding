@@ -50,7 +50,7 @@ insights:
   - id: ins-003
     title: Writes get HITL; interpretation gets a prompt; audit is thin
     statement: Notion puts quality rules in the instructions box (taxonomy, Guardrails) and write safety in product controls (OAuth, dropdowns, Require confirmation before email). Viktor also gates Notion writes with Slack Approve / Always approve. Help Center sells Custom Agents as "Safe & transparent" — activity logs, version history, reviewable and reversible runs — and puts workspace audit-log changes behind Enterprise. On this workspace the researcher looked for activity logs and they were not there. What exists is a current-run step trace, Recent chats, and an Analytics page that upsells Enterprise. No first-class send audit or unsend. Zapier treats HITL as an optional step after AI by Zapier ("review the output before your Zap continues") and has Zap history as a first-class page — empty immediately after publish. Viktor Usage was not opened.
-    why_it_matters: For XeroForce, HITL before an outbound or financial write is the right pattern. Prompt guardrails are not enough. Do not copy Notion's help copy. If activity logs are advertised and missing, operators will think they have an audit trail they do not. Gating real visibility behind Enterprise is worse when the action touches money or customers.
+    why_it_matters: "The asymmetry is the point: dangerous *actions* get real machinery (OAuth scopes, dropdowns, confirmation-before-send), while whether the agent *reasoned correctly* gets a free-text box. For accounting that is backwards — posting to the wrong account is a judgment error, and no approval toggle catches it. Digits' answer is a verification layer that checks each categorisation against firm history before posting (`ins-014`). Prompt guardrails are not enough, and audit is only one of three separate gaps (`ins-013`). Do not copy Notion's help copy: if activity logs are advertised and missing, operators will believe they have an audit trail they do not, which is worse than not claiming one. Gating real visibility behind Enterprise is worse still when the action touches money."
     status: emerging
     confidence: medium
     products:
@@ -95,9 +95,9 @@ insights:
       - After a real Slack push, does Zapier Zap history show the run?
 
   - id: ins-005
-    title: The split is how much of the execution plan the user defines vs delegates
-    statement: "The key difference across Zapier, Notion, and Viktor is how much of the execution plan the user defines versus delegates to the agent. Zapier is high-control / low-autonomy — the user owns an explicit workflow graph (steps, inputs/outputs, test, publish); AI or agentic steps run inside it. Viktor is high-autonomy / low-workflow-control — the user delegates an outcome; Viktor decides more of the path; the workflow is less visible and less configurable (this pass never produced an inspectable portal object). Notion sits in the middle — a persistent agent with instructions, context, tools, triggers, and permissions, but not a Zapier-style step graph. Primary abstractions, left to right: Workflow → Agent → AI employee. Feature checklists matter less than this. Hands-on: Zapier published Slack Feedback → AI Triage Analysis → Email v1 (AI by Zapier as a step); Notion published Customer Feedback Triage Agent; Viktor took a Slack brief and never showed a task editor."
-    why_it_matters: XeroForce is picking a point on this line, not a model vendor. High workflow control is inspectable and closer to existing automation. High autonomy is faster to start and harder to govern. The middle (named agent, no full graph) is a real third product, not a compromise UI. Karbon's Agents article sits with Viktor (firm roles) — that is marketing only; the Agents product has not been seen. HubSpot skipped.
+    title: Compare what the user creates — workflow, agent, or task — and the count of them
+    statement: "The useful comparison is the object the user actually creates: Zapier a workflow, Notion an agent, Viktor a task. Compare created objects to created objects, not to marketing personas. Viktor's 'AI employee' is the persona; the employee is singular and pre-existing, so the thing the user makes is a task assigned to it. The count is the discriminator — Notion creates many named agents (one per job or vertical), Viktor has one employee and many tasks, Zapier has many workflows and no agent object at all. That maps onto how much of the execution plan the user specifies. Zapier is high-control / low-autonomy: an explicit graph (steps, inputs/outputs, test, publish) with AI inside a step. Viktor is high-autonomy / low-control: delegate an outcome, and the plan is neither visible nor editable — there was no task editor because the task was never materialised outside Slack. Notion is a real middle: a persistent agent with instructions, context, tools, triggers, and permissions, but no step graph. Left to right: Workflow → Agent → Task. Hands-on: Zapier published Slack Feedback → AI Triage Analysis → Email v1; Notion published Customer Feedback Triage Agent; Viktor took a Slack brief and produced nothing inspectable."
+    why_it_matters: XeroForce is picking a point on this line, not a model vendor. High workflow control is inspectable and closer to existing automation. High autonomy is faster to start and harder to govern. The middle (named agent, no full graph) is a real third product, not a compromise UI. The object choice also fixes the governance unit — permissions, audit, and ownership attach to whatever the user creates, so 'one employee, many tasks' and 'many scoped agents' have different governance ceilings before a single feature is built. Karbon's Agents marketing sits near Viktor; the Agents product has not been seen. HubSpot skipped.
     status: emerging
     confidence: low-medium
     products:
@@ -174,9 +174,9 @@ insights:
       - Track which announced features (Kai, Karbon Agents) actually ship in 2026
 
   - id: ins-008
-    title: MCP-as-platform is an industry convergence — accounting data as tools for external AI
-    statement: "Zapier, Karbon, and Digits all ship or announce MCP servers. The pattern: expose accounting/practice data to Claude, ChatGPT, Cursor, and other AI clients. This means firms will expect to plug their accounting data into whatever AI tools they choose, not only the vendor's own AI. Zapier also positions as a tool layer for external agents (not just its own Agents/Zaps)."
-    why_it_matters: If XeroForce does not ship an MCP server (or equivalent open tool layer), firms will route Xero data through competitors that do. The value shifts from 'our AI is best' to 'our data is accessible to any AI.'
+    title: Integration runs two directions — hosting other tools vs being a tool inside someone else's agent
+    statement: "Every product here integrates other tools *inbound*, and every product can also be integrated *outbound* as a capability inside another workflow builder or agent. Those are different strategies and get collapsed into one 'ecosystem' bullet. Zapier, Karbon, and Digits all ship or announce MCP servers — Digits' is live for Claude, ChatGPT and Cursor; Karbon announced one in June 2026. Zapier is deliberately both: a host with a canvas, and a positioned tool layer for external agents."
+    why_it_matters: "Two questions, and the second is usually asked first. (1) Does Xero host — does work happen on our surface, competing with Zapier and Karbon for that position? (2) Is Xero callable — can an agent elsewhere use Xero as a capability? Being callable is not free: the reasoning, the UI, and the customer relationship all move to the caller, and Xero becomes a commodity capability. But refusing to be callable means firms route Xero data through competitors that allow it. MCP is the mechanism once the surface-vs-capability question is answered, not a substitute for answering it. Zapier's hedge — be both — is the option worth studying."
     status: emerging
     confidence: low
     products: []
@@ -221,7 +221,7 @@ insights:
   - id: ins-010
     title: Accounting work is workflow-defined; that is why role agents and tutorial-plus-tool content both fit
     statement: "Aider's tutorial names a standard close problem (managers have no single view of client close; status lives in meetings and memory; same issue at 15 or 15,000 clients), then shows the tool: portfolio dashboard, one Monthly Close - Accrual template applied to 82 clients, Built-in/Automatic checks, exception inbox, Ask Client batched to end of day. Workflow and tool are taught together. That only works if the close is shared enough to template. Contrast with MSPs, where vendors sell tools and workflows vary — a known industry problem. The 40 hours/employee/month figure remains a Karbon CEO research claim, not a measured Aider outcome; 19.9 hrs/week is a separate Karbon PM number."
-    why_it_matters: XeroForce can assume more shared close workflow than an MSP product can — that is why one accrual template can sit on 82 clients. That does not decide the Agents model. It does mean opinionated close checklists are viable here. Client reports and full-lifecycle ops are a separate scope question, not proven by this tutorial.
+    why_it_matters: "XeroForce can assume more shared close workflow than an MSP product can — that is why one accrual template can sit on 82 clients. But low process variance cuts both ways, and only one side is usually noticed: it is good for shipping (templates work, onboarding is fast) and bad for defensibility (no moat, low switching cost). If one accrual template covers 82 clients, that is as easy for Karbon to copy from us as for us to copy from them. Caution on the inference too — a template applied to 82 clients shows one *firm* standardised, and a vendor teaching close-as-standard has an interest in it being standard. The stronger argument is from the content market: tutorials that teach workflow-plus-tool would not land if practitioners did not recognise the workflow. None of this decides the Agents model, and client reports and lifecycle ops remain a separate scope question."
     status: emerging
     confidence: low-medium
     products: []
@@ -258,3 +258,78 @@ insights:
       - Do clients want Tuesday-afternoon treated books, or is that a SaaS story?
       - Hands-on inbox volume vs Xero rec queue
       - Reconcile 17,792 / <73% vs 2,000 / 86.8% whitepaper numbers
+
+  - id: ins-012
+    title: AI plays two roles — it builds the workflow and it runs inside the workflow
+    statement: "These are separate products with separate trust profiles, and the same vendor ships both. Build-time: Zapier's Copilot interrogates the user with clarifying questions and then constructs the Zap; Notion generates an agent from a description, which the user then edits. Runtime: AI by Zapier as a step in the published graph; the Notion agent executing against its instructions. The seam is visible where build-time AI is incomplete — Zapier's Copilot could say what instructions belonged in a step but sometimes required manual copy/paste rather than applying them itself. Viktor collapsed the two into one chat, which is the better explanation of why nothing was inspectable: the build-time output (a spec) was never materialised as an artifact, so there was no object to edit, test, or audit."
+    why_it_matters: "A wrong build-time suggestion is caught by a human before publish. A wrong runtime action posts to the ledger. So the two need different governance, and build-time AI is the cheaper place to be aggressive — it can be confidently wrong at low cost, provided it produces a reviewable artifact. XeroForce should decide explicitly whether it is shipping AI that builds close workflows, AI that runs inside them, or both, rather than letting 'AI-powered' cover both. The Viktor failure mode is the one to avoid: if build-time AI produces no artifact, the product loses inspectability, testing, and audit in one move."
+    status: emerging
+    confidence: low-medium
+    products:
+      - notion
+      - viktor
+      - zapier
+    domains:
+      - agent_builder
+    supporting_evidence_ids:
+      - ev-agent-zapier-001
+      - ev-agent-notion-001
+      - ev-agent-notion-003
+      - ev-agent-viktor-001
+      - ev-agent-viktor-003
+    counter_evidence_ids: []
+    next_evidence:
+      - Does a Zapier Agent produce a build-time artifact, or is it chat-only?
+      - Notion — can the generated agent config be diffed or versioned after edit?
+      - Whether any product tests the build-time output before publish
+
+  - id: ins-013
+    title: Safety is three separate gaps — audit, rollback, and gating — and gating is the one nobody made intelligent
+    statement: "Do not collapse these. (a) Auditability: what happened. Zapier has Zap history as a first-class page; Notion advertises activity logs that were not on this workspace; Viktor showed 0 tasks while claiming a live backend job. (b) Reversibility: undo it. Not present on any of the three — no unsend in Notion, no rollback observed anywhere. (c) Gating: when to involve a human. All three treat this as *static configuration* — a 'Require confirmation before email' toggle, an optional Human-in-the-Loop step, a Slack Approve / Always approve button. None decides dynamically from confidence, risk, or amount. Both competitors claim the opposite: Digits routes low-confidence items to an exception queue, Karbon's checks flag and humans resolve (`CLAIMED`, neither verified)."
+    why_it_matters: "Statically-configured gating cannot work for ledger writes, because a $40 coding and a $120k journal entry cannot share one toggle. Risk-triggered gating is the thing to build, and it is the specific place where the accounting competitors are ahead of the agent builders rather than merely different. Reversibility is the second-order requirement and is absent across the whole category — for financial writes it is arguably harder and more valuable than audit, since audit tells an operator what went wrong and rollback lets them fix it. Treat the three as three roadmap items, not one 'trust and safety' bucket."
+    status: emerging
+    confidence: medium
+    products:
+      - notion
+      - viktor
+      - zapier
+    domains:
+      - agent_builder
+      - competitor
+    supporting_evidence_ids:
+      - ev-agent-notion-003
+      - ev-agent-notion-005
+      - ev-agent-viktor-001
+      - ev-agent-viktor-003
+      - ev-agent-zapier-001
+      - ev-comp-digits-001
+      - ev-comp-aider-003
+    counter_evidence_ids: []
+    next_evidence:
+      - Any product where the gate is confidence- or amount-triggered rather than configured
+      - Hands-on Digits exception queue — what actually routes an item there?
+      - Whether Zapier's HITL step pauses a live run, and whether a paused run can be rolled back
+      - Does any product offer undo on a completed write?
+
+  - id: ins-014
+    title: Accounting is more verifiable than engineering, not less judgment-heavy — verifiability is what makes trust buildable
+    statement: "The tempting read of Digits' 95%+ auto-post rate is that accounting is rules-based and needs little judgment. Digits' own whitepaper contradicts it: 10.4% human-versus-human disagreement on categorisation and a 79.1% human baseline. Two accountants shown the same transaction disagree roughly one time in ten, which is a judgment ceiling, not a rulebook. The distinction that survives is verifiability — a categorisation can be checked against firm history, prior decisions, and a ledger that must balance. That is what lets Digits run a second AI layer verifying the first *before* posting; engineering has no equivalent grader, since tests catch some errors and no design errors."
+    why_it_matters: "This reframes the adoption question. Trust is the outcome; demonstrable verification is the mechanism that produces it — so the thing to build is the checking layer, not more model quality. But the adoption equation has two terms pulling opposite ways: verifiability raises the ceiling, and consequence severity raises the confidence threshold required to act. A bad commit is reverted in review; a bad posting has tax and audit consequences and may need a restatement. Whether accounting therefore adopts faster than engineering is genuinely open, and it is a customer question rather than a desk-research one."
+    status: emerging
+    confidence: low
+    products: []
+    domains:
+      - competitor
+      - customer
+      - product_knowledge
+    supporting_evidence_ids:
+      - ev-comp-digits-002
+      - ev-comp-digits-001
+      - ev-comp-digits-004
+      - ev-comp-aider-003
+    counter_evidence_ids: []
+    next_evidence:
+      - Where accountants say judgment genuinely dominates and no check would settle it
+      - Whether firms trust an automated verification layer more than a human reviewer
+      - The real error cost of a wrong posting — corrected quietly, or a restatement?
+      - Adoption rates for AI in accounting vs engineering, and the reason given

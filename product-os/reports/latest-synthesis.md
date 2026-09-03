@@ -51,9 +51,9 @@ Viktor's onboarding is Slack-first (signup, channel invite, "Now go to Slack," c
 - Status: emerging · Confidence: medium
 - Evidence: `ev-agent-viktor-001`, `ev-agent-viktor-003`
 
-### The split is how much of the execution plan the user defines vs delegates
+### Compare what the user creates — workflow, agent, or task — and the count of them
 
-The key difference across Zapier, Notion, and Viktor is how much of the execution plan the user defines versus delegates to the agent. Zapier is high-control / low-autonomy — the user owns an explicit workflow graph (steps, inputs/outputs, test, publish); AI or agentic steps run inside it. Viktor is high-autonomy / low-workflow-control — the user delegates an outcome; Viktor decides more of the path; the workflow is less visible and less configurable (this pass never produced an inspectable portal object). Notion sits in the middle — a persistent agent with instructions, context, tools, triggers, and permissions, but not a Zapier-style step graph. Primary abstractions, left to right: Workflow → Agent → AI employee. Feature checklists matter less than this. Hands-on: Zapier published Slack Feedback → AI Triage Analysis → Email v1 (AI by Zapier as a step); Notion published Customer Feedback Triage Agent; Viktor took a Slack brief and never showed a task editor.
+The useful comparison is the object the user actually creates: Zapier a workflow, Notion an agent, Viktor a task. Compare created objects to created objects, not to marketing personas. Viktor's 'AI employee' is the persona; the employee is singular and pre-existing, so the thing the user makes is a task assigned to it. The count is the discriminator — Notion creates many named agents (one per job or vertical), Viktor has one employee and many tasks, Zapier has many workflows and no agent object at all. That maps onto how much of the execution plan the user specifies. Zapier is high-control / low-autonomy: an explicit graph (steps, inputs/outputs, test, publish) with AI inside a step. Viktor is high-autonomy / low-control: delegate an outcome, and the plan is neither visible nor editable — there was no task editor because the task was never materialised outside Slack. Notion is a real middle: a persistent agent with instructions, context, tools, triggers, and permissions, but no step graph. Left to right: Workflow → Agent → Task. Hands-on: Zapier published Slack Feedback → AI Triage Analysis → Email v1; Notion published Customer Feedback Triage Agent; Viktor took a Slack brief and produced nothing inspectable.
 
 - Status: emerging · Confidence: low-medium
 - Evidence: `ev-agent-notion-001`, `ev-agent-notion-003`, `ev-agent-notion-004`, `ev-agent-notion-005`, `ev-agent-viktor-001`, `ev-agent-viktor-002`, `ev-agent-viktor-003`, `ev-agent-zapier-001`, `ev-comp-aider-002`
@@ -72,9 +72,9 @@ Across both agent builders and competitors, there is a consistent gap between wh
 - Status: emerging · Confidence: low-medium
 - Evidence: `ev-comp-aider-001`, `ev-comp-digits-001`, `ev-agent-notion-005`, `ev-agent-viktor-003`, `ev-agent-zapier-001`, `ev-comp-aider-002`, `ev-comp-aider-003`
 
-### MCP-as-platform is an industry convergence — accounting data as tools for external AI
+### Integration runs two directions — hosting other tools vs being a tool inside someone else's agent
 
-Zapier, Karbon, and Digits all ship or announce MCP servers. The pattern: expose accounting/practice data to Claude, ChatGPT, Cursor, and other AI clients. This means firms will expect to plug their accounting data into whatever AI tools they choose, not only the vendor's own AI. Zapier also positions as a tool layer for external agents (not just its own Agents/Zaps).
+Every product here integrates other tools *inbound*, and every product can also be integrated *outbound* as a capability inside another workflow builder or agent. Those are different strategies and get collapsed into one 'ecosystem' bullet. Zapier, Karbon, and Digits all ship or announce MCP servers — Digits' is live for Claude, ChatGPT and Cursor; Karbon announced one in June 2026. Zapier is deliberately both: a host with a canvas, and a positioned tool layer for external agents.
 
 - Status: emerging · Confidence: low
 - Evidence: `ev-comp-aider-001`, `ev-comp-digits-001`, `ev-agent-zapier-001`
@@ -99,6 +99,27 @@ Digits built a GL from the ground up. Architecture bet (whitepaper): specialized
 
 - Status: emerging · Confidence: low
 - Evidence: `ev-comp-digits-001`, `ev-comp-digits-002`, `ev-comp-digits-003`, `ev-comp-digits-004`
+
+### AI plays two roles — it builds the workflow and it runs inside the workflow
+
+These are separate products with separate trust profiles, and the same vendor ships both. Build-time: Zapier's Copilot interrogates the user with clarifying questions and then constructs the Zap; Notion generates an agent from a description, which the user then edits. Runtime: AI by Zapier as a step in the published graph; the Notion agent executing against its instructions. The seam is visible where build-time AI is incomplete — Zapier's Copilot could say what instructions belonged in a step but sometimes required manual copy/paste rather than applying them itself. Viktor collapsed the two into one chat, which is the better explanation of why nothing was inspectable: the build-time output (a spec) was never materialised as an artifact, so there was no object to edit, test, or audit.
+
+- Status: emerging · Confidence: low-medium
+- Evidence: `ev-agent-zapier-001`, `ev-agent-notion-001`, `ev-agent-notion-003`, `ev-agent-viktor-001`, `ev-agent-viktor-003`
+
+### Safety is three separate gaps — audit, rollback, and gating — and gating is the one nobody made intelligent
+
+Do not collapse these. (a) Auditability: what happened. Zapier has Zap history as a first-class page; Notion advertises activity logs that were not on this workspace; Viktor showed 0 tasks while claiming a live backend job. (b) Reversibility: undo it. Not present on any of the three — no unsend in Notion, no rollback observed anywhere. (c) Gating: when to involve a human. All three treat this as *static configuration* — a 'Require confirmation before email' toggle, an optional Human-in-the-Loop step, a Slack Approve / Always approve button. None decides dynamically from confidence, risk, or amount. Both competitors claim the opposite: Digits routes low-confidence items to an exception queue, Karbon's checks flag and humans resolve (`CLAIMED`, neither verified).
+
+- Status: emerging · Confidence: medium
+- Evidence: `ev-agent-notion-003`, `ev-agent-notion-005`, `ev-agent-viktor-001`, `ev-agent-viktor-003`, `ev-agent-zapier-001`, `ev-comp-digits-001`, `ev-comp-aider-003`
+
+### Accounting is more verifiable than engineering, not less judgment-heavy — verifiability is what makes trust buildable
+
+The tempting read of Digits' 95%+ auto-post rate is that accounting is rules-based and needs little judgment. Digits' own whitepaper contradicts it: 10.4% human-versus-human disagreement on categorisation and a 79.1% human baseline. Two accountants shown the same transaction disagree roughly one time in ten, which is a judgment ceiling, not a rulebook. The distinction that survives is verifiability — a categorisation can be checked against firm history, prior decisions, and a ledger that must balance. That is what lets Digits run a second AI layer verifying the first *before* posting; engineering has no equivalent grader, since tests catch some errors and no design errors.
+
+- Status: emerging · Confidence: low
+- Evidence: `ev-comp-digits-002`, `ev-comp-digits-001`, `ev-comp-digits-004`, `ev-comp-aider-003`
 
 ## Current hypotheses
 
@@ -185,12 +206,22 @@ Would falsify:
 
 ### Continuous close may create work the way more-frequent MSP scans do — verify with users
 
-Digits now distinguishes fast month-end (automate the sprint; still a sprint) from continuous close (rebuild the GL; no backlog). They say bolt-on AI on Xero cannot do the second because of truth drift. Their own 'stay traditional if' list matches the MSP-scan cut: <5 clients, clients not asking for current reporting, monthly cadence still fits. Alternative still open: even for larger books, a mid-month exception drip can be more work than one automated close if nobody uses Tuesday-afternoon numbers. If that is right, XeroForce can ship a faster month-end on Xero and cover most of the market Digits concedes. If clients are asking for current numbers and week-one cleanup is the burnout, a smarter sprint will not be enough.
+Digits now distinguishes fast month-end (automate the sprint; still a sprint) from continuous close (rebuild the GL; no backlog). They say bolt-on AI on Xero cannot do the second because of truth drift. Their own 'stay traditional if' list matches the MSP-scan cut: <5 clients, clients not asking for current reporting, monthly cadence still fits. Alternative still open: even for larger books, a mid-month exception drip can be more work than one automated close if nobody uses Tuesday-afternoon numbers. If that is right, XeroForce can ship a faster month-end on Xero and cover most of the market Digits concedes. If clients are asking for current numbers and week-one cleanup is the burnout, a smarter sprint will not be enough. Sharper framing than 'do they want it': continuous close is a *behaviour migration*, not a feature. The firm has to move from batch review to continuous exception handling, which changes staffing, scheduling, and what clients expect — which is why Digits had to rebuild the ledger, and also why a firm might decline even if the technology works. So the question is whether firms are willing to change behaviour, and whether adoption needs an explicit incentive to happen at all.
 
 Would falsify:
 - Firms citing always-current cash/P&L as why they left Xero
 - Continuous inbox that is quieter than Xero's month-end queue
 - Clients actually requesting treated numbers mid-period (the Stripe Tuesday story)
+- Firms who migrated cadence without any incentive beyond the software
+
+### Accounting adopts agents faster than engineering because the work is checkable — unless error cost dominates
+
+Verifiability, not absence of judgment, is what distinguishes accounting from engineering here. A categorisation can be graded against firm history, prior decisions, and a ledger that must balance; a software design decision cannot. That is why a verification layer is buildable in accounting and largely is not in engineering, and it predicts higher adoption. Against that, consequence severity raises the confidence threshold required before anyone lets an agent act: a bad commit is reverted in review, a bad posting may need a restatement and has statutory exposure. So the prediction is conditional — accounting adopts faster where errors are cheap to correct (coding, categorisation, reconciliation) and slower where they are not (anything filed, remitted, or reported externally), rather than faster or slower overall. Note this is not the same claim as 'accounting needs little judgment', which Digits' own 10.4% human-versus-human disagreement contradicts.
+
+Would falsify:
+- Blanket refusal to automate regardless of reversibility (then trust, not error cost, is the barrier)
+- Firms automating filings readily (then consequence severity is not the brake)
+- Accounting adoption no higher than engineering despite verifiability
 
 ## Uncited evidence
 

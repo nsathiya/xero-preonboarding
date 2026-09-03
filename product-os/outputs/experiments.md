@@ -29,7 +29,7 @@ Highest-value next evidence, from the living insight and hypothesis cards.
 - Does the Monday 9 AM digest actually arrive?
 - After a real Slack push, does Zapier Zap history show the run?
 
-## From insight `ins-005` — The split is how much of the execution plan the user defines vs delegates
+## From insight `ins-005` — Compare what the user creates — workflow, agent, or task — and the count of them
 
 - Create a Zapier Agent (not a Zap) — still a graph, or a new object?
 - Notion Version history / handoff (Activity logs already missing)
@@ -52,7 +52,7 @@ Highest-value next evidence, from the living insight and hypothesis cards.
 - Hands-on verification of Digits shipped features
 - Track which announced features (Kai, Karbon Agents) actually ship in 2026
 
-## From insight `ins-008` — MCP-as-platform is an industry convergence — accounting data as tools for external AI
+## From insight `ins-008` — Integration runs two directions — hosting other tools vs being a tool inside someone else's agent
 
 - Test Digits MCP server with Claude/Cursor
 - Karbon MCP server — what data is exposed?
@@ -76,6 +76,26 @@ Highest-value next evidence, from the living insight and hypothesis cards.
 - Do clients want Tuesday-afternoon treated books, or is that a SaaS story?
 - Hands-on inbox volume vs Xero rec queue
 - Reconcile 17,792 / <73% vs 2,000 / 86.8% whitepaper numbers
+
+## From insight `ins-012` — AI plays two roles — it builds the workflow and it runs inside the workflow
+
+- Does a Zapier Agent produce a build-time artifact, or is it chat-only?
+- Notion — can the generated agent config be diffed or versioned after edit?
+- Whether any product tests the build-time output before publish
+
+## From insight `ins-013` — Safety is three separate gaps — audit, rollback, and gating — and gating is the one nobody made intelligent
+
+- Any product where the gate is confidence- or amount-triggered rather than configured
+- Hands-on Digits exception queue — what actually routes an item there?
+- Whether Zapier's HITL step pauses a live run, and whether a paused run can be rolled back
+- Does any product offer undo on a completed write?
+
+## From insight `ins-014` — Accounting is more verifiable than engineering, not less judgment-heavy — verifiability is what makes trust buildable
+
+- Where accountants say judgment genuinely dominates and no check would settle it
+- Whether firms trust an automated verification layer more than a human reviewer
+- The real error cost of a wrong posting — corrected quietly, or a restatement?
+- Adoption rates for AI in accounting vs engineering, and the reason given
 
 ## From hypothesis `hyp-001` — The category bet is scoped objects + triggers, not agent UX
 
@@ -157,6 +177,17 @@ Highest-value next evidence, from the living insight and hypothesis cards.
 - Accountants who ignore intra-month flags or say flags create extra review
 - SMBs / firms who only need books at month-end, tax, or lender ask
 - Firms with >5 clients who still prefer a batch close
+- Firms who say the staffing/scheduling change is the blocker, not the technology
 - Firms citing always-current cash/P&L as why they left Xero
 - Continuous inbox that is quieter than Xero's month-end queue
 - Clients actually requesting treated numbers mid-period (the Stripe Tuesday story)
+- Firms who migrated cadence without any incentive beyond the software
+
+## From hypothesis `hyp-012` — Accounting adopts agents faster than engineering because the work is checkable — unless error cost dominates
+
+- Accountants who accept automation on coding but not on anything filed
+- Firms who say they trust an automated check more than a junior reviewer
+- Adoption concentrated in reversible steps of the close
+- Blanket refusal to automate regardless of reversibility (then trust, not error cost, is the barrier)
+- Firms automating filings readily (then consequence severity is not the brake)
+- Accounting adoption no higher than engineering despite verifiability

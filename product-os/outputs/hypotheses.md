@@ -265,7 +265,7 @@ Aider can ship one Monthly Close - Accrual template onto 82 clients because clos
 - **Confidence**: low
 - **Derived from**: `ins-011`, `ins-006`
 
-Digits now distinguishes fast month-end (automate the sprint; still a sprint) from continuous close (rebuild the GL; no backlog). They say bolt-on AI on Xero cannot do the second because of truth drift. Their own 'stay traditional if' list matches the MSP-scan cut: <5 clients, clients not asking for current reporting, monthly cadence still fits. Alternative still open: even for larger books, a mid-month exception drip can be more work than one automated close if nobody uses Tuesday-afternoon numbers. If that is right, XeroForce can ship a faster month-end on Xero and cover most of the market Digits concedes. If clients are asking for current numbers and week-one cleanup is the burnout, a smarter sprint will not be enough.
+Digits now distinguishes fast month-end (automate the sprint; still a sprint) from continuous close (rebuild the GL; no backlog). They say bolt-on AI on Xero cannot do the second because of truth drift. Their own 'stay traditional if' list matches the MSP-scan cut: <5 clients, clients not asking for current reporting, monthly cadence still fits. Alternative still open: even for larger books, a mid-month exception drip can be more work than one automated close if nobody uses Tuesday-afternoon numbers. If that is right, XeroForce can ship a faster month-end on Xero and cover most of the market Digits concedes. If clients are asking for current numbers and week-one cleanup is the burnout, a smarter sprint will not be enough. Sharper framing than 'do they want it': continuous close is a *behaviour migration*, not a feature. The firm has to move from batch review to continuous exception handling, which changes staffing, scheduling, and what clients expect — which is why Digits had to rebuild the ledger, and also why a firm might decline even if the technology works. So the question is whether firms are willing to change behaviour, and whether adoption needs an explicit incentive to happen at all.
 
 **Supporting evidence** (4 in corpus):
 - `ev-comp-digits-004` — Digits blog: What is continuous close (Digits)
@@ -277,8 +277,38 @@ Digits now distinguishes fast month-end (automate the sprint; still a sprint) fr
 - Accountants who ignore intra-month flags or say flags create extra review
 - SMBs / firms who only need books at month-end, tax, or lender ask
 - Firms with >5 clients who still prefer a batch close
+- Firms who say the staffing/scheduling change is the blocker, not the technology
 
 **What would falsify:**
 - Firms citing always-current cash/P&L as why they left Xero
 - Continuous inbox that is quieter than Xero's month-end queue
 - Clients actually requesting treated numbers mid-period (the Stripe Tuesday story)
+- Firms who migrated cadence without any incentive beyond the software
+
+## Accounting adopts agents faster than engineering because the work is checkable — unless error cost dominates
+
+- **ID**: `hyp-012`
+- **Status**: proposed
+- **Confidence**: low
+- **Derived from**: `ins-014`, `ins-013`, `ins-006`
+
+Verifiability, not absence of judgment, is what distinguishes accounting from engineering here. A categorisation can be graded against firm history, prior decisions, and a ledger that must balance; a software design decision cannot. That is why a verification layer is buildable in accounting and largely is not in engineering, and it predicts higher adoption. Against that, consequence severity raises the confidence threshold required before anyone lets an agent act: a bad commit is reverted in review, a bad posting may need a restatement and has statutory exposure. So the prediction is conditional — accounting adopts faster where errors are cheap to correct (coding, categorisation, reconciliation) and slower where they are not (anything filed, remitted, or reported externally), rather than faster or slower overall. Note this is not the same claim as 'accounting needs little judgment', which Digits' own 10.4% human-versus-human disagreement contradicts.
+
+**Supporting evidence** (3 in corpus):
+- `ev-comp-digits-002` — Digits whitepaper: LLMs vs AGL on transaction categorization (Digits)
+- `ev-comp-digits-001` — Digits: Agentic General Ledger, positioning, and AI-native accounting (Digits)
+- `ev-comp-aider-003` — Aider tutorial: period-close dashboard, firm template, Ask Client (Aider (Karbon) tutorial)
+
+**Assumptions:**
+- Digits' reported human disagreement rate is representative, not an artefact of their sample
+- Firms distinguish reversible postings from filed/remitted outputs when deciding what to automate
+
+**What would strengthen:**
+- Accountants who accept automation on coding but not on anything filed
+- Firms who say they trust an automated check more than a junior reviewer
+- Adoption concentrated in reversible steps of the close
+
+**What would falsify:**
+- Blanket refusal to automate regardless of reversibility (then trust, not error cost, is the barrier)
+- Firms automating filings readily (then consequence severity is not the brake)
+- Accounting adoption no higher than engineering despite verifiability
