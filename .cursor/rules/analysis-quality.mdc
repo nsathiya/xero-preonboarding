@@ -1,0 +1,68 @@
+---
+description: What earns a place in a readout — tests a finding must pass before being presented
+alwaysApply: true
+---
+
+# Finding quality
+
+`corpus-contract.mdc` governs where evidence goes and how trustworthy
+its source is. This governs whether a conclusion is worth making at
+all. Correct status pills on a table row do not license an assertive
+headline above it.
+
+## Five tests. A finding failing any one gets cut or rewritten.
+
+**1. Negation.** State the opposite. If it is absurd, there is no
+information in the finding. "Connecting an integration is not the same
+as activating a trigger" — nobody would claim otherwise. Cut it.
+
+**2. Decision.** Name the decision it changes. If we would build the
+same thing either way, it belongs in the corpus, not the readout.
+
+**3. Dimension over anecdote.** Prefer "here is an axis, and here is
+where each product sits" over "here is what product X does." A
+dimension generalises to products we have not seen. Keep the axis
+internally consistent — compare created *objects* to created objects
+(workflow / agent / task), never an object to a marketing persona
+("AI employee").
+
+**4. Question over assertion when evidence is thin.** At `CLAIMED` or
+`UNSEEN`, a well-posed question outranks a confident finding. "Are
+users willing to change behaviour for this, and does it need an
+incentive?" beats asserting that they will not.
+
+**5. Failure findings need a "so we should."** "Vendor X did not ship
+Y" matters only if it implies something we should do. Critique is the
+easiest thing to write and the easiest to mistake for insight.
+
+## Do not collapse
+
+Two observations are two findings when they have different trust
+profiles, different owners, or different failure modes:
+
+- AI that **builds** a workflow vs AI that **runs inside** it. A bad
+  build-time suggestion is caught before publish; a bad runtime action
+  posts to the ledger.
+- Integrating other tools **into** us vs being a tool **inside**
+  someone else's agent. Different strategy, not one ecosystem bullet.
+- **Auditability** (what happened), **reversibility** (undo it), and
+  **gating** (when to involve a human). Each absence is its own gap,
+  and gating splits again into statically configured vs risk-triggered.
+
+## Selection bias to watch
+
+Reviewing products invites failure-shaped findings, because gaps are
+conspicuous and criticism reads as rigour. Before presenting, count
+them: if most findings are "they did not ship X," this is a QA report,
+not a strategy read. Ask what design space the products *reveal*, not
+only where they fall short.
+
+## When a claim outruns its evidence
+
+Say so in the same sentence, not in a footnote. Marketing about roles
+is evidence of a marketed direction, never of a product.
+
+Then check whether the vendor's own data contradicts the claim being
+built on it. Digits' reported 10.4% human-vs-human disagreement on
+categorisation undercuts any "accounting needs little judgment" read
+of their automation rate.

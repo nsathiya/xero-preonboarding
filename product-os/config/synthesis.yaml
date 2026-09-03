@@ -1,0 +1,28 @@
+version: 0.1
+
+evidence:
+  allowed_domains:
+    - agent_builder
+    - customer
+    - competitor
+    - product_knowledge
+
+validation:
+  require_fields:
+    evidence:
+      - id
+      - domain
+      - source_type
+      - source_name
+      - date
+      - title
+      - confidence
+    context:
+      - id
+      - type
+      - effective_date
+      - confidence
+
+notes:
+  rule: "Notes are allowed, but must not be treated as raw evidence."
+

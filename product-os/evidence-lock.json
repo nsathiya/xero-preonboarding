@@ -1,0 +1,21 @@
+{
+  "_comment": "Immutability ledger for evidence/. Managed by `product-os lock`. Evidence is append-only: to revise an interpretation, add a new evidence file and update the relevant scorecard instead of editing a locked file.",
+  "files": {
+    "evidence/agent-builders/notion/ev-agent-notion-001.md": "b760d0bca45778a7eb59c02aff1ea086d42aedbc482a63318bb6986ef80c82a0",
+    "evidence/agent-builders/notion/ev-agent-notion-002.md": "68b2276925ebe1b57a4672642dd268352fe1a59a0c2b70d8ef2d788fadcca5e4",
+    "evidence/agent-builders/notion/ev-agent-notion-003.md": "083400955ed21c1fdfb533338d48e5738591cfc16941fe0ce1e615359d6ca965",
+    "evidence/agent-builders/notion/ev-agent-notion-004.md": "c579df6013b27815597029a1fd738c77e48a567488bb276fad747374177def59",
+    "evidence/agent-builders/notion/ev-agent-notion-005.md": "295e8507a1a5465607bc7d17256ed905b471965f114f15e78df153a6f69a25b8",
+    "evidence/agent-builders/viktor/ev-agent-viktor-001.md": "824371e4ca1ca9abf24a46fa4bcf5524d209e7727bf24bc7c8c08f937530f2fe",
+    "evidence/agent-builders/viktor/ev-agent-viktor-002.md": "13d16633dc11a6311a2c1809bedbc5a2c72357942fdb57c9596965e6857a7467",
+    "evidence/agent-builders/viktor/ev-agent-viktor-003.md": "36d693dad7c8f9023cf4b815cf553ec0fbcb0f0f052d3726404177b2a04ee06d",
+    "evidence/agent-builders/zapier/ev-agent-zapier-001.md": "25a7ffe9c1c243d6e83317835803d5b8cd3a490f986781ecae1ae6b6c6fca399",
+    "evidence/competitors/aider/ev-comp-aider-001.md": "17f3066127fd60295e370aaed00e9686214bfa6860d9a1d1788d581f70fc00a7",
+    "evidence/competitors/aider/ev-comp-aider-002.md": "72d3d0f921b877ae6ec92646a18535d22c93538ee4af1e35a2f9ee1ed0d2a452",
+    "evidence/competitors/aider/ev-comp-aider-003.md": "3a713431402aa586e444a65ee5608b2fa86920ae56fd15a2c0dd032044dd00df",
+    "evidence/competitors/digits/ev-comp-digits-001.md": "f57a2597ff2ac8f91cf10a33a8b95d783bb8b344f0f5d6c7af0a52e5f2e05809",
+    "evidence/competitors/digits/ev-comp-digits-002.md": "bebeb0e1795abb633c7b40b548b3777c1250751012d5c5358a485a6c5e7196f7",
+    "evidence/competitors/digits/ev-comp-digits-003.md": "c4ee399181bfd57e2560de8c11e6bae1d2356492a87fc88693934999353017b7",
+    "evidence/competitors/digits/ev-comp-digits-004.md": "b6f40cf293b53453d281e85928ab926f1422d1027e65e16e85ee96665bbcc040"
+  }
+}

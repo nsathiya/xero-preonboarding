@@ -1,0 +1,21 @@
+# Screen recordings. Each of these exceeds GitHub's 100 MB per-file hard
+# limit (1.8 GB total), so they stay local. The evidence files under
+# product-os/evidence/ carry the extracted observations, and the frame
+# screenshots alongside them are committed.
+*.mov
+*.mp4
+*.mkv
+
+# Generated intermediates. Rebuild with `product-os refresh`.
+product-os/derived/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+product-os/.deps/
+
+# macOS
+.DS_Store

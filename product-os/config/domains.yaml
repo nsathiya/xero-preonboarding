@@ -1,0 +1,17 @@
+domains:
+  - id: agent_builder
+    evidence_path: evidence/agent-builders
+  - id: customer
+    evidence_path: evidence/customers
+  - id: competitor
+    evidence_path: evidence/competitors
+  - id: product_knowledge
+    evidence_path: evidence/product-knowledge
+
+defaults:
+  evidence_inbox:
+    agent_builder: evidence/agent-builders/_inbox
+    customer: evidence/customers
+    competitor: evidence/competitors
+    product_knowledge: evidence/product-knowledge
+

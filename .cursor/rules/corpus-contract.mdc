@@ -1,0 +1,54 @@
+---
+description: Immutable evidence vs living scorecards — the product-os corpus contract
+alwaysApply: true
+---
+
+# Corpus contract
+
+Evidence persists; interpretations evolve. Which layer you are writing
+to determines whether you append or overwrite.
+
+| Layer | Mutability | Rule |
+|---|---|---|
+| `evidence/**` | **Immutable, additive** | One file per source or pass. Never rewrite to reflect a newer opinion. |
+| `notes/competitors/scorecard/*.md` | **Overwrite in place** | Current read per competitor. Always cites evidence IDs. |
+| `beliefs/*.yaml` | Living | Cross-cutting insights/hypotheses. |
+| `outputs/`, `derived/`, `reports/` | Generated | Never hand-edit. `refresh` renders them. |
+
+## Adding a source
+
+1. Create the evidence file: `product-os new-evidence --domain ... --slug ...`
+   Raw quotes/screens go under `## Raw evidence`; your reading goes under `## Notes`.
+2. Update the affected scorecard rows, `effective_date`, and `## Changelog`.
+3. Edit `beliefs/` only if a cross-cutting belief actually moved.
+4. Run `refresh`, then `lock`.
+
+Changed your mind about something already filed? Add a new evidence
+file and edit the scorecard. Do not edit the old evidence file.
+
+## Status discipline
+
+Every scorecard row carries `VERIFIED` / `DOCS` / `CLAIMED` / `UNSEEN`
+/ `DISPUTED` plus the evidence IDs behind it. Never upgrade a status
+without an evidence ID that justifies it.
+
+- Marketing and roadmap are `CLAIMED`, never `VERIFIED`.
+- If we have not looked, write `UNSEEN`. Do not infer.
+- Evidence about one product area is **not** evidence about another.
+  A rules/checklist product tells you nothing about a vendor's agent
+  product.
+- Conflicting sources are `DISPUTED`. Keep both numbers and name the
+  discrepancy rather than picking one.
+- Keep vendor claims attributed ("CEO says", "help doc says") and
+  separate from what was observed.
+
+Cite evidence IDs individually — `ev-comp-x-001..003` is not a valid
+citation and fails validation.
+
+## Enforcement
+
+`validate` / `refresh` fail on modified locked evidence, a competitor
+missing a scorecard, a scorecard that does not cite all of its
+evidence, unknown evidence IDs, invalid statuses, or a missing
+Changelog. Implementation: `product-os/src/product_os/corpus_rules.py`.
+Prose: `notes/competitors/scorecard/_scorecard-guide.md`.
